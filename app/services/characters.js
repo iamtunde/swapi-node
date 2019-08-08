@@ -1,9 +1,9 @@
-const {getMovies} = require('../lib/swapi');
+const {getCharacters} = require('../lib/swapi');
 
 function all(req, res) {
-    getMovies().then(response => {
+    getCharacters().then(response => {
         return res.status(200).json({
-            message: 'Movies successfully retrieved',
+            message: 'Characters successfully retrieved',
             error: false,
             data: response
         })
@@ -16,8 +16,4 @@ function all(req, res) {
     })
 }
 
-function one(params) {
-    return params
-}
-
-module.exports = {all, one}
+module.exports = {all}

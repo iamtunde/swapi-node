@@ -7,6 +7,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/movies', require('./movies'));
+app.use('/characters', require('./characters'));
 
 // Catch missing endpoint to display 404
 app.all('*', (req, res) => {
