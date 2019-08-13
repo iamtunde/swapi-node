@@ -2,13 +2,13 @@
 const {all} = require('../services/movies')
 
 exports.fetchAll = (req, res) => {
-    try {
-        return all(req, res)
-    } catch(e) {
-        return res.status(500).json({
-            message: 'An error has occured: ' + e.message,
-            error: true,
-            data: []
+    all().then(response => {
+        return res.status(200).json({
+            message: 'Movies successfully retrieved',
+            error: [],
+            data: response
         })
-    }
+    }).catch((err) => {
+        return res.status(400).json(err)
+    })
 }

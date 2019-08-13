@@ -2,13 +2,13 @@
 const {all} = require('../services/characters')
 
 exports.fetchAll = (req, res) => {
-    try {
-        return all(req, res)
-    } catch (e) {
-        return res.status(500).json({
-            message: 'An error has occured: ' + e.message,
-            error: true,
-            data: []
+    all(req).then(characters => {
+        return res.status(200).json({
+            message: 'Characters successfully retrieved',
+            error: [],
+            data: characters
         })
-    }
+    }).catch(err => {
+        return res.status(400).json(err)
+    })
 }
