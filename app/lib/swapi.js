@@ -4,7 +4,7 @@ const _ = require('lodash');
 
 const swapi = axios.create({baseURL: config.swapi.url})
 
-const getIdFromUrl = url => url.substring(0, url.length - 1).split('/').pop()
+const getIdFromUrl = url => parseInt(url.substring(0, url.length - 1).split('/').pop())
 
 function getMovies() {
     return swapi.get('films').then(response => {
@@ -39,6 +39,7 @@ function getCharacters() {
         let characters = results.map((character) => {
             if(character.gender !== 'n/a') {
                 return {
+                    id: getIdFromUrl(character.url),
                     name: character.name,
                     gender: character.gender,
                     height: character.height,
@@ -48,6 +49,7 @@ function getCharacters() {
                     eye_color: character.eye_color,
                     birth_year: character.birth_year,
                     homeworld: character.homeworld,
+                    url: character.url
                 }
             }
         })
