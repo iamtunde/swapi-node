@@ -60,19 +60,14 @@ const getMovieCharacters = (movieId) => {
 };
 
 const transformAndCacheCharacter = (character) => {
-    const characterObj = {
-        id: getIdFromUrl(character.url),
-        name: character.name,
-        gender: character.gender,
-        height: isNaN(character.height) ? 0 : +character.height,
-        mass: character.mass,
-        hair_color: character.hair_color,
-        skin_color: character.skin_color,
-        eye_color: character.eye_color,
-        birth_year: character.birth_year,
-        homeworld: character.homeworld,
-        url: character.url
-    };
+    const characterId = getIdFromUrl(character.url)
+    const characterHeight = isNaN(character.height) ? 0 : +character.height
+
+    const characterObj = Object.assign({
+        id: characterId,
+        height: characterHeight,
+    }, _.pick(character, ['name', 'gender', 'hiar_color', 'skin_color', 'eye_color', 'birth_year', 'homeworld', 'url']));
+
     swapiCache.set(character.url, characterObj);
     return characterObj;
 };
