@@ -3,7 +3,7 @@ dotenv.config()
 
 module.exports = {
     swapi_url: process.env.SWAPI_URL,
-    port: process.env.APP_PORT,
+    port: process.env.APP_PORT || 3030,
     db_client: process.env.DATABASE_CLIENT,
     db_url: process.env.DATABASE_URL_LOCAL,
 }
