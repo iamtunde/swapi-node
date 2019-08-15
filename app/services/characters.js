@@ -1,10 +1,11 @@
-const {getCharacters} = require('../lib/swapi');
+const { getMovieCharacters } = require('../lib/swapi');
 const _ = require('lodash');
-const sumArrayElements = array => array.reduce(function (a, b) { return a + b }, 0);
-const convertToFeet = 
 
 //function converts cm values to ft,in value
 function convertToFeet(cm) {
+    if (isNaN(cm)){
+        return null;
+    }
     const actualValue = ((cm * 0.393700) / 12);
     const feet = Math.floor(actualValue);
     const inches = Math.round((actualValue - feet) * 12);
@@ -12,38 +13,33 @@ function convertToFeet(cm) {
     return feet + 'ft and ' + inches + ' inches';
 }
 
-function all(req) {
-    return getCharacters().then(characters => {
-        let response
-        let heights = []
+function all({ movie_id, sortBy, sortDirection, filterBy, filterValue }) {
+    return getMovieCharacters(movie_id).then(characters => {
+        let results
         
-        if(req.query.sortBy) {
-            response = _.orderBy(characters, req.query.sortBy, req.query.order)
-        } else if(req.query.filterBy) {
-            const params = {'gender': req.query.anchor}
-            response = _.filter(characters, params)
+        if(sortBy) {
+            results = _.orderBy(characters, sortBy, sortDirection)
+        } else if(filterBy) {
+            const params = {'gender': filterValue}
+            results = _.filter(characters, params)
         } else {
-            response = characters
+            results = characters
         }
 
-        //extract the heights of the matching characters
-        response.map(({height}) => { heights.push(parseInt(height)) })
-
         //converts the total height from CM to Ft & Inches
-        const totalHeightInCM = sumArrayElements(heights)
+        const totalHeightInCM = results.reduce((total, currCharacter) => total + +currCharacter.height, 0)
 
         //construct meta_data object
         const meta_data = {
-            total_characters: response.length,
+            total_characters: results.length,
             total_heights: {
                 cm: totalHeightInCM + 'cm',
                 ft: convertToFeet(totalHeightInCM)
             }
         }
 
-        response.push(meta_data)
-        return response
+        return { results, meta_data };
     })
 }
 
-module.exports = {all}
+module.exports = {all} 

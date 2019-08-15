@@ -8,11 +8,12 @@ app.get('/', (req, res) => {
 
 app.use('/movies', require('./movies'));
 app.use('/characters', require('./characters'));
+app.use('/comments', require('./comments'));
 
 // Catch missing endpoint to display 404
 app.all('*', (req, res) => {
     res.status(404).json({
-        message: 'Endpoint does not exist',
+        message: 'That endpoint does not exist',
         error: true,
         data: []
     });

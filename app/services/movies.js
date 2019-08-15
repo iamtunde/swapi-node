@@ -1,14 +1,28 @@
-const {getMovies} = require('../lib/swapi');
+const {getMovies, getMovieById} = require('../lib/swapi');
+const fetchComment = require('./comments')['fetch']
+
 const _ = require('lodash');
 
 function all() {
     return getMovies().then(movies => {
-        return _.orderBy(movies, 'release_date', 'asc')
+        const sortedMovies = _.map(_.orderBy(movies, 'release_date', 'asc'), movie => _.omit(movie, 'characters'));
+
+        return Promise.all(_.map(sortedMovies, movie => {
+            return fetchComment({ movie_id: movie.id }).then(comment => {
+                movie.total_comments = comment.length
+                return movie
+            })
+        }))
     })
 }
 
-function one(params) {
-    return params
+function one(movieId) {
+    return getMovieById(movieId).then(movie => {
+        return fetchComment({ movie_id: movie.id }).then(comment => {
+            movie.total_comments = comment.length
+            return movi
+        })
+    })
 }
 
 module.exports = {all, one}

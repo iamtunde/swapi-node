@@ -1,5 +1,5 @@
 //import the movies service
-const {all} = require('../services/movies')
+const {all, one} = require('../services/movies')
 
 exports.fetchAll = (req, res) => {
     all().then(response => {
@@ -8,7 +8,21 @@ exports.fetchAll = (req, res) => {
             error: [],
             data: response
         })
-    }).catch((err) => {
+    }).catch(err => {
+        console.log(err)
+        return res.status(400).json(err)
+    })
+}
+
+exports.fetchOne = (req, res) => {
+    one(req.params.movie_id).then(response => {
+        return res.status(200).json({
+            message: 'Movie successfully retrieved',
+            error: [],
+            data: response
+        })
+    }).catch(err => {
+        console.log(err)
         return res.status(400).json(err)
     })
 }
