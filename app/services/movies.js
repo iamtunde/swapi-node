@@ -20,7 +20,7 @@ function one(movieId) {
     return getMovieById(movieId).then(movie => {
         return fetchComment({ movie_id: movie.id }).then(comment => {
             movie.total_comments = comment.length
-            return movi
+            return movie
         })
     })
 }
