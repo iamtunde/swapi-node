@@ -9,7 +9,6 @@ exports.fetchAll = (req, res) => {
             data: response
         })
     }).catch(err => {
-        console.log(err)
         return res.status(400).json(err)
     })
 }
@@ -22,7 +21,6 @@ exports.fetchOne = (req, res) => {
             data: response
         })
     }).catch(err => {
-        console.log(err)
         return res.status(400).json(err)
     })
 }

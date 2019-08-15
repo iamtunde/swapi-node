@@ -1,10 +1,8 @@
-const config = require('../config')
+const { swapi_url } = require('../config')
 const axios = require('axios')
 const _ = require('lodash');
 
-const swapi = axios.create({
-    baseURL: config.swapi.url
-})
+const swapi = axios.create({ baseURL: swapi_url })
 
 const getIdFromUrl = url => parseInt(url.substring(0, url.length - 1).split('/').pop(), 10)
 

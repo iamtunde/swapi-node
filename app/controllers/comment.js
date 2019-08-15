@@ -9,7 +9,6 @@ exports.addComment = (req, res) => {
             data: comment
         })
     }).catch(err => {
-        console.log(err)
         return res.status(400).json(err)
     })
 }
@@ -24,7 +23,6 @@ exports.fetchComments = (req, res) => {
             data: comments
         })
     }).catch(err => {
-        console.log(err)
         return res.status(400).json(err)
     })
 }

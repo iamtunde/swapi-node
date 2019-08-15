@@ -4,7 +4,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 
 //initialize the env variables
-require('dotenv').config()
+const {port} = require('./config')
 
 //initialize the app
 const app = express()
@@ -12,8 +12,6 @@ const app = express()
 //using body parser
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
-
-const port = process.env.PORT || 3030
 
 //require the routes dir. with the different routes
 const routes = require('../app/routes');

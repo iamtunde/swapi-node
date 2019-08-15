@@ -8,8 +8,8 @@ function add(data) {
     data.created_at = moment().tz(now.toString()).utc().format()
     data.updated_at = moment().tz(now.toString()).utc().format()
 
-    return database.insert(data).into('comments').then(recordId => {
-        return database.select('*').from('comments').where({id: recordId})
+    return database('comments').insert(data).returning('*').then(record => {
+        return record
     })
 }
 

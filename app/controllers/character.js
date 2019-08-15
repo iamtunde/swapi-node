@@ -12,7 +12,6 @@ exports.fetchAll = (req, res) => {
             data: characters
         })
     }).catch(err => {
-        console.log(err)
         return res.status(400).json(err)
     })
 }
