@@ -15,11 +15,19 @@ exports.fetchAll = (req, res) => {
 
 exports.fetchOne = (req, res) => {
     one(req.params.movie_id).then(response => {
-        return res.status(200).json({
-            message: 'Movie successfully retrieved',
-            error: [],
-            data: response
-        })
+        if(response.data) {
+            return res.status(200).json({
+                message: 'Movie successfully retrieved',
+                error: [],
+                data: response
+            })
+        } else {
+            return res.status(404).json({
+                message: 'Movie not found',
+                error: [],
+                data: []
+            })
+        }
     }).catch(err => {
         return res.status(400).json(err)
     })

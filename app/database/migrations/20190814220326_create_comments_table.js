@@ -4,8 +4,7 @@ exports.up = function (knex) {
         table.string('comment', 500)
         table.string('ip_address', 15)
         table.integer('movie_id')
-        table.string('created_at', 50)
-        table.string('updated_at', 50)
+        table.timestamps(false, true);
     })
 };
 
