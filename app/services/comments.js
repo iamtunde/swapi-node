@@ -1,7 +1,6 @@
 const database = require('../database/index')
 
 function add(data) {
-    console.log(data)
     return database('comments').returning('*').insert(data).then(record => {
         return record
     })
