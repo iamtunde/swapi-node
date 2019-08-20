@@ -1,9 +1,9 @@
-const { db_client, db_url } = require('./app/config')
+const config = require('./app/config')
 // Update with your config settings.
 module.exports = {
   development: {
-    client: db_client,
-    connection: db_url,
+    client: config.db_client,
+    connection: config.db_url,
     migrations: {
       tableName: 'knex_migrations',
       directory: __dirname + '/app/database/migrations/',
@@ -14,8 +14,13 @@ module.exports = {
   },
 
   production: {
-    client: db_client,
-    connection: db_url,
+    client: config.db_client_live,
+    connection: {
+      host: process.env.DATABASE_HOST || 'localhost',
+      database: config.db_name_live,
+      user: config.db_user_live,
+      password: config.db_password_live,
+    },
     migrations: {
       tableName: 'knex_migrations',
       directory: __dirname + '/app/database/migrations/',
