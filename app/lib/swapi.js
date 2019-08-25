@@ -28,8 +28,10 @@ const transformAndCacheMovie = (movie) => {
 const errorHandler = (message = 'Swapi error occurred') => err => {
     throw {
         message,
-        error: err,
-        status: err.status,
+        error: {
+            message: err.message,
+            statusCode: err.response.status //get the http response code
+        },
         data: []
     }
 }
