@@ -7,6 +7,9 @@ module.exports = {
     // db_client: process.env.DATABASE_CLIENT,
     // db_url: process.env.DATABASE_URL_LOCAL,
     
+    db_port: process.env.DATABASE_PORT || 3306,
+    db_host: process.env.DATABASE_HOST || '127.0.0.1',
+
     db_client: process.env.DATABASE_CLIENT,
     db_user_local: process.env.DATABASE_USER_LOCAL,
     db_password_local: process.env.DATABASE_PASSWORD_LOCAL,
