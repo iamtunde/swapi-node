@@ -26,6 +26,7 @@ const transformAndCacheMovie = (movie) => {
 }
 
 const errorHandler = (message = 'Swapi error occurred') => err => {
+    console.log(err)
     throw {
         message,
         error: {
@@ -85,5 +86,6 @@ const getCharactersByUrl = (url) => {
 module.exports = {
     getMovies,
     getMovieCharacters,
-    getMovieById
+    getMovieById,
+    errorHandler
 }

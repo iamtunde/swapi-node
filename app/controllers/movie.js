@@ -1,5 +1,6 @@
 //import the movies service
 const {all, one} = require('../services/movies')
+const { getErrorCode } = require('../lib/utils')
 
 exports.fetchAll = (req, res) => {
     all().then(response => {
@@ -9,7 +10,7 @@ exports.fetchAll = (req, res) => {
             data: response
         })
     }).catch(err => {
-        return res.status(err.error.statusCode || 400).json(err)
+        return res.status(getErrorCode(err) || 400).json(err)
     })
 }
 
@@ -21,6 +22,6 @@ exports.fetchOne = (req, res) => {
             data: response
         })
     }).catch(err => {
-        return res.status(err.error.statusCode || 400).json(err)
+        return res.status(getErrorCode(err) || 400).json(err)
     })
 }

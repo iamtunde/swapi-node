@@ -12,7 +12,10 @@ function all() {
                 movie.total_comments = comment.length
                 return movie
             })
-        }))
+        })).catch(err => {
+            console.log(err)
+            return err
+        })
     })
 }
 
@@ -21,6 +24,9 @@ function one(movieId) {
         return fetchComment({ movie_id: movie.id }).then(comment => {
             movie.total_comments = comment.length
             return movie
+        }).catch(err => {
+            console.log(err)
+            return err
         })
     })
 }

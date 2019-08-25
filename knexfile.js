@@ -3,7 +3,13 @@ const config = require('./app/config')
 module.exports = {
   development: {
     client: config.db_client,
-    connection: config.db_url,
+    // connection: config.db_url,
+    connection: {
+      host: process.env.DATABASE_HOST,
+      database: config.db_name_local,
+      user: config.db_user_local,
+      password: config.db_password_local,
+    },
     migrations: {
       tableName: 'knex_migrations',
       directory: __dirname + '/app/database/migrations/',

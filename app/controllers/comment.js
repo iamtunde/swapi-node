@@ -1,5 +1,6 @@
 //import the movies service
 const {add, fetch} = require('../services/comments')
+const { getErrorCode } = require('../lib/utils')
 
 exports.addComment = (req, res) => {
     return add(req.body).then(comment => {
@@ -9,7 +10,7 @@ exports.addComment = (req, res) => {
             data: comment
         })
     }).catch(err => {
-        return res.status(err.error.statusCode || 400).json(err)
+        return res.status(getErrorCode(err) || 400).json(err)
     })
 }
 
@@ -23,7 +24,6 @@ exports.fetchComments = (req, res) => {
             data: comments
         })
     }).catch(err => {
-        console.log(err)
-        return res.status(err.error.statusCode || 400).json(err)
+        return res.status(getErrorCode(err) || 400).json(err)
     })
 }
