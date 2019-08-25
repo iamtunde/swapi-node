@@ -11,16 +11,12 @@ function add(data) {
     return database('comments').returning('*').insert(data).then(recordId => {
         return database.select().from('comments').where({
             id: recordId }).first()
-        }).catch(err => {
-            return err
         })
 }
 
 function fetch(params) {
     return database.select().from('comments').where(params).orderBy('created_at', 'asc').then(data => {
         return data
-    }).catch(err => {
-        return err
     })
 }
 
