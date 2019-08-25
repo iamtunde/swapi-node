@@ -19,8 +19,7 @@ function all({ movie_id, sortBy, sortDirection, filterBy, filterValue }) {
         
         if(sortBy && filterBy) {
             //first we filter the characters
-            const params = {'gender': filterValue}
-            filteredCharacters = _.filter(characters, params)
+            filteredCharacters = characters.filter((character) => { return character.gender == filterValue})
 
             //now let's sort the filtered values
             sortCharacters = _.orderBy(filteredCharacters, sortBy, sortDirection)
@@ -29,8 +28,9 @@ function all({ movie_id, sortBy, sortDirection, filterBy, filterValue }) {
         } else if(sortBy) {
             results = _.orderBy(characters, sortBy, sortDirection)
         } else if(filterBy) {
-            const params = {'gender': filterValue}
-            results = _.filter(characters, params)
+            results = characters.filter((character) => {
+                return character.gender == filterValue
+            })
         } else {
             results = characters
         }

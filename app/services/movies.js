@@ -5,10 +5,17 @@ const _ = require('lodash');
 
 function all() {
     return getMovies().then(movies => {
-        const sortedMovies = _.map(_.orderBy(movies, 'release_date', 'asc'), movie => _.omit(movie, 'characters'));
+        const omittedCharacters = []
 
-        return Promise.all(_.map(sortedMovies, movie => {
-            return fetchComment({ movie_id: movie.id }).then(comment => {
+        movies.map((movie) => {
+            movie = _.omit(movie, 'characters')
+            omittedCharacters.push(movie)
+        });
+
+        const sortedMovies = _.orderBy(omittedCharacters, 'release_date', 'asc')
+        
+        return Promise.all(sortedMovies.map((movie) => {
+            return fetchComment({movie_id: movie.id}).then(comment => {
                 movie.total_comments = comment.length
                 return movie
             })
