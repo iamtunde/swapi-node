@@ -20,7 +20,7 @@ module.exports = {
   },
 
   production: {
-    client: config.db_client_live,
+    client: config.db_client,
     connection: {
       host: process.env.DATABASE_HOST || 'localhost',
       database: config.db_name_live,
