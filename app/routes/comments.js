@@ -7,11 +7,11 @@ const ipMiddleware = function (req, res, next) {
     next();
 };
 
-
+const validator = require('../validators/comments')
 
 //import moview controller
 const commentController = require('../controllers/comment')
 
-route.post('/', ipMiddleware, commentController.addComment)
+route.post('/', [validator.add, ipMiddleware], commentController.addComment)
 
 module.exports = route;

@@ -1,4 +1,5 @@
 FROM node:10
+RUN apt-get update && apt-get install redis-server
 WORKDIR /app
 COPY package.json /app
 RUN npm install
