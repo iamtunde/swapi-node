@@ -1,6 +1,7 @@
 const { swapi_url } = require('../config')
 const axios = require('axios')
-const _ = require('lodash');
+const _ = require('lodash')
+const { errorHandler } = require('./utils')
 
 const swapi = axios.create({ baseURL: swapi_url })
 
@@ -23,18 +24,6 @@ const transformAndCacheMovie = (movie) => {
     }, _.pick(movie, ['title', 'opening_crawl', 'release_date', 'url', 'characters']));
     swapiCache.set(movieObj.id, movieObj);
     return movieObj;
-}
-
-const errorHandler = (message = 'Swapi error occurred') => err => {
-    console.log(err)
-    throw {
-        message,
-        error: {
-            message: err.message,
-            statusCode: err.response.status //get the http response code
-        },
-        data: []
-    }
 }
 
 const getMovies = () => {

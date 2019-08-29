@@ -3,6 +3,19 @@ function getErrorCode(err) {
     return code
 }
 
+const errorHandler = (message = 'Swapi error occurred') => err => {
+    console.log(err)
+    throw {
+        message,
+        error: {
+            message: err.message,
+            statusCode: err.response.status //get the http response code
+        },
+        data: []
+    }
+}
+
 module.exports = {
-    getErrorCode
+    getErrorCode,
+    errorHandler
 }
