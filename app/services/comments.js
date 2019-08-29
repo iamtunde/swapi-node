@@ -15,7 +15,7 @@ function add(data) {
 }
 
 function fetch(params) {
-    return database.select().from('comments').where(params).orderBy('created_at', 'asc').then(data => {
+    return database.select().from('comments').where(params).orderBy('created_at', 'desc').then(data => {
         return data
     })
 }
