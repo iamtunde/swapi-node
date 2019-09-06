@@ -14,7 +14,5 @@ app.use('/comments', require('./comments'));
 app.all('*', (req, res) => {
     res.status(404).json({
         message: 'That endpoint does not exist',
-        error: true,
-        data: []
     });
 });

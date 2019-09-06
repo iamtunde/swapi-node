@@ -38,7 +38,7 @@ const getMovieById = (id) => {
     if (!movie) {
         return swapi.get(`films/${id}`).then(({
             data
-        }) => transformAndCacheMovie(data)).catch(errorHandler(`Error fetching movie with id: ${id}`));
+        }) => transformAndCacheMovie(data)).catch(errorHandler(`Can't find movie with id: ${id}`));
     }
     return Promise.resolve(movie);
 }
@@ -56,7 +56,7 @@ const transformAndCacheCharacter = (character) => {
     const characterObj = Object.assign({
         id: characterId,
         height: characterHeight,
-    }, _.pick(character, ['name', 'gender', 'hiar_color', 'skin_color', 'eye_color', 'birth_year', 'homeworld', 'url']));
+    }, _.pick(character, ['name', 'gender', 'hair_color', 'skin_color', 'eye_color', 'birth_year', 'homeworld', 'url']));
 
     swapiCache.set(character.url, characterObj);
     return characterObj;
@@ -67,7 +67,7 @@ const getCharactersByUrl = (url) => {
     if (!character) {
         return axios.get(url).then(({
             data
-        }) => transformAndCacheCharacter(data)).catch(errorHandler(`Error fetching character by url: ${url}`));
+        }) => transformAndCacheCharacter(data)).catch(errorHandler(`Can't find character with the url: ${url}`));
     }
     return Promise.resolve(character);
 }

@@ -11,7 +11,6 @@ exports.fetchAll = async (req, res) => {
 
         return res.status(200).json({
             message: 'Characters successfully retrieved',
-            error: [],
             data: characters
         })
     } catch(err) {
