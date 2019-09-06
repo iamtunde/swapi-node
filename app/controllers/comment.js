@@ -7,7 +7,6 @@ exports.addComment = async (req, res) => {
         const comment = await add(req.body)
         return res.status(200).json({
             message: 'Comment sucessfully added',
-            error: [],
             data: comment
         })
     } catch(err) {
@@ -22,7 +21,6 @@ exports.fetchComments = async (req, res) => {
         
         return res.status(200).json({
             message: 'Comments successfully retrieved',
-            error: [],
             data: comments
         })
     } catch(err) {

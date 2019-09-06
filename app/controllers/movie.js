@@ -7,7 +7,6 @@ exports.fetchAll = async (req, res) => {
         const movies = await all()
         return res.status(200).json({
             message: 'Movies successfully retrieved',
-            error: [],
             data: movies
         })
     } catch(err) {
@@ -21,7 +20,6 @@ exports.fetchOne = async (req, res) => {
         const movie = await one(req.params.movie_id)
         return res.status(200).json({
             message: 'Movie successfully retrieved',
-            error: [],
             data: movie
         })
     } catch(err) {

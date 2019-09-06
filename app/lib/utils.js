@@ -4,14 +4,9 @@ function getErrorCode(err) {
 }
 
 const errorHandler = (message = 'Swapi error occurred') => err => {
-    console.log(err)
+    // console.log(err)
     throw {
         message,
-        error: {
-            message: err.message,
-            statusCode: err.response.status //get the http response code
-        },
-        data: []
     }
 }
 

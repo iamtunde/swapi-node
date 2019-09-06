@@ -10,7 +10,14 @@ function convertToFeet(cm) {
     const feet = Math.floor(actualValue);
     const inches = Math.round((actualValue - feet) * 12);
 
-    return feet + 'ft and ' + inches + ' inches';
+    return {
+        feet: feet,
+        inches: inches
+    }
+}
+
+function heightInCM(results) {
+    return results.reduce((total, character) => total + +character.height, 0)
 }
 
 function all({ movie_id, sortBy, sortDirection, filterBy, filterValue }) {
@@ -41,7 +48,7 @@ function all({ movie_id, sortBy, sortDirection, filterBy, filterValue }) {
         //construct meta_data object
         const meta_data = {
             total_characters: results.length,
-            total_heights_in_cm: totalHeightInCM + 'cm',
+            total_heights_in_cm: heightInCM(results),
             total_heights_in_feet: convertToFeet(totalHeightInCM)
         }
 
